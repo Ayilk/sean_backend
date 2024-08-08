@@ -1,0 +1,3 @@
+### GET PERSONAS
+
+GET http://localhost:5000/api/personas

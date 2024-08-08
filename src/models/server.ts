@@ -1,4 +1,5 @@
 import express from 'express';
+import routesPersonas from '../routes/persona';
 
 
 class Server {
@@ -8,6 +9,9 @@ class Server {
     constructor(){
         this.app = express();
         this.port = process.env.PORT || '5000';
+        //El middeware se llama antes del routeo
+        this.middlewares();
+        this.routes();
     }
 
     listen(){
@@ -15,6 +19,16 @@ class Server {
             console.log("Escuchando en el puerto ", this.port)
         })
     }
+
+    middlewares(){
+        //parseo del body
+        this.app.use(express.json)
+    }
+
+    routes(){
+        this.app.use('/api/personas', routesPersonas);
+    }
+    
 }
 
 export default Server;
